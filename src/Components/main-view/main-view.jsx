@@ -15,10 +15,10 @@ export const MainView = () => {
             director: {
                 name: 'Christopher Nolan',
                 bio: 'Christopher Nolan is a British-American filmmaker known for his innovative storytelling and visually striking films, including Inception, The Dark Knight Trilogy, and Interstellar. Born on July 30, 1970, he is celebrated for exploring complex themes of time and identity.',
-                birthdate: ISODate('1970-07-30T00:00:00.000Z'),
+                birthdate: new Date('1970-07-30T00:00:00.000Z'),
                 deathdate: null
             },
-            imageUrl: 'https://upload.wikimedia.org/wikipedia/en/2/2f/Inception_ver3.jpg',
+            imageUrl: 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSR1QehLSRaoyK_SdS22HiJSMkeVnI6xEHTyiI8KQv838LqRiNmIbpPM32C98J9HZ4kJZPe',
             featured: true     
         },
         {
@@ -32,10 +32,10 @@ export const MainView = () => {
             director: {
               name: 'Christopher Nolan',
               bio: 'Christopher Nolan is a British-American filmmaker known for his innovative storytelling and visually striking films, including Inception, The Dark Knight Trilogy, and Interstellar. Born on July 30, 1970, he is celebrated for exploring complex themes of time and identity.',
-              birthdate: ISODate('1970-07-30T00:00:00.000Z'),
+              birthdate: new Date('1970-07-30T00:00:00.000Z'),
               deathdate: null
             },
-            imageUrl: 'https://upload.wikimedia.org/wikipedia/en/b/bb/Interstellar_film_poster.jpg',
+            imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE1beX5NmDZEd_vN2gja1SCmN6RW7kMwb_xsx9nHrHseAadgMQIFvIs1V8Hy7aG7flV_Tt2g',
             featured: true
         },
         {
@@ -49,10 +49,10 @@ export const MainView = () => {
             director: {
               name: 'Quentin Tarantino',
               bio: 'Quentin Tarantino is an American filmmaker known for his unique style, characterized by nonlinear storytelling and dark humor.',
-              birthdate: ISODate('1963-03-27T00:00:00.000Z'),
+              birthdate: new Date('1963-03-27T00:00:00.000Z'),
               deathdate: null
             },
-            imageUrl: 'https://upload.wikimedia.org/wikipedia/en/6/62/Kill_Bill_Vol_1.jpg',
+            imageUrl: 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSlLnLZMfKcXnz59Qx-i27ZIYTNm_HPkdj77zKV2IjYA_iQ7ccdXNOaFlXSReAocFGwhNJVyQ',
             featured: false
         }
     ]);
