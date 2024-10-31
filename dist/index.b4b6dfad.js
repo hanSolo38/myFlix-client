@@ -27397,19 +27397,72 @@ const MainView = ()=>{
             setMovies(moviesFromApi);
         });
     }, []);
-    if (selectedMovie) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
-        movie: selectedMovie,
-        onBackClick: ()=>setSelectedMovie(null)
-    }, void 0, false, {
-        fileName: "src/Components/main-view/main-view.jsx",
-        lineNumber: 31,
-        columnNumber: 13
-    }, undefined);
+    if (selectedMovie) {
+        const selectedGenre = selectedMovie.genre.name;
+        let similarMovies = movie.filter((movie)=>movie.genre.name === selectedGenre && movie.id !== selectedMovie.id);
+        return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+            children: [
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
+                    movie: selectedMovie,
+                    onBackClick: ()=>{
+                        setSelectedMovie(null);
+                    }
+                }, void 0, false, {
+                    fileName: "src/Components/main-view/main-view.jsx",
+                    lineNumber: 36,
+                    columnNumber: 13
+                }, undefined),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
+                    fileName: "src/Components/main-view/main-view.jsx",
+                    lineNumber: 37,
+                    columnNumber: 13
+                }, undefined),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("hr", {}, void 0, false, {
+                    fileName: "src/Components/main-view/main-view.jsx",
+                    lineNumber: 38,
+                    columnNumber: 13
+                }, undefined),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
+                    children: "Similar Movies"
+                }, void 0, false, {
+                    fileName: "src/Components/main-view/main-view.jsx",
+                    lineNumber: 39,
+                    columnNumber: 13
+                }, undefined),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                    children: similarMovies.length > 0 ? similarMovies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
+                            movie: movie,
+                            onMovieClick: (newSelectedMovie)=>{
+                                setSelectedMovie(newSelectedMovie);
+                            }
+                        }, movie.id, false, {
+                            fileName: "src/Components/main-view/main-view.jsx",
+                            lineNumber: 43,
+                            columnNumber: 25
+                        }, undefined)) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        children: "No similar movies found."
+                    }, void 0, false, {
+                        fileName: "src/Components/main-view/main-view.jsx",
+                        lineNumber: 52,
+                        columnNumber: 21
+                    }, undefined)
+                }, void 0, false, {
+                    fileName: "src/Components/main-view/main-view.jsx",
+                    lineNumber: 40,
+                    columnNumber: 13
+                }, undefined)
+            ]
+        }, void 0, true, {
+            fileName: "src/Components/main-view/main-view.jsx",
+            lineNumber: 35,
+            columnNumber: 9
+        }, undefined);
+    }
     if (movie.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: "The list is empty!"
     }, void 0, false, {
         fileName: "src/Components/main-view/main-view.jsx",
-        lineNumber: 36,
+        lineNumber: 60,
         columnNumber: 16
     }, undefined);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27420,12 +27473,12 @@ const MainView = ()=>{
                 }
             }, movie.id, false, {
                 fileName: "src/Components/main-view/main-view.jsx",
-                lineNumber: 42,
+                lineNumber: 66,
                 columnNumber: 17
             }, undefined))
     }, void 0, false, {
         fileName: "src/Components/main-view/main-view.jsx",
-        lineNumber: 40,
+        lineNumber: 64,
         columnNumber: 9
     }, undefined);
 };
