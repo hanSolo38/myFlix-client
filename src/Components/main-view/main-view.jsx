@@ -1,67 +1,58 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 
 export const MainView = () => {
-    const [movie, setMovies] = useState([
-        {
-            id: 1,
-            title: 'Inception',
-            description: 'A genre that explores futuristic concepts, advanced technology, and extraterrestrial life.',
-            genre: {
-                name: 'Science Fiction',
-                description: 'A genre that explores futuristic concepts, advanced technology, and extraterrestrial life.'
-            },
-            director: {
-                name: 'Christopher Nolan',
-                bio: 'Christopher Nolan is a British-American filmmaker known for his innovative storytelling and visually striking films, including Inception, The Dark Knight Trilogy, and Interstellar. Born on July 30, 1970, he is celebrated for exploring complex themes of time and identity.',
-                birthdate: new Date('1970-07-30T00:00:00.000Z'),
-                deathdate: null
-            },
-            imageUrl: 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSR1QehLSRaoyK_SdS22HiJSMkeVnI6xEHTyiI8KQv838LqRiNmIbpPM32C98J9HZ4kJZPe',
-            featured: true     
-        },
-        {
-            id: 2,
-            title: 'Interstellar',
-            description: 'A team of explorers travel through a wormhole in space.',
-            genre: {
-              name: 'Science Fiction',
-              description: 'A genre that explores futuristic concepts, advanced technology, and extraterrestrial life.'
-            },
-            director: {
-              name: 'Christopher Nolan',
-              bio: 'Christopher Nolan is a British-American filmmaker known for his innovative storytelling and visually striking films, including Inception, The Dark Knight Trilogy, and Interstellar. Born on July 30, 1970, he is celebrated for exploring complex themes of time and identity.',
-              birthdate: new Date('1970-07-30T00:00:00.000Z'),
-              deathdate: null
-            },
-            imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE1beX5NmDZEd_vN2gja1SCmN6RW7kMwb_xsx9nHrHseAadgMQIFvIs1V8Hy7aG7flV_Tt2g',
-            featured: true
-        },
-        {
-            id: 3,
-            title: 'Kill Bill: Vol. 1',
-            description: 'A former assassin seeks revenge on her ex-colleagues.',
-            genre: {
-              name: 'Action',
-              description: 'A genre characterized by excitement, high-energy sequences, and fast-paced plots.'
-            },
-            director: {
-              name: 'Quentin Tarantino',
-              bio: 'Quentin Tarantino is an American filmmaker known for his unique style, characterized by nonlinear storytelling and dark humor.',
-              birthdate: new Date('1963-03-27T00:00:00.000Z'),
-              deathdate: null
-            },
-            imageUrl: 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSlLnLZMfKcXnz59Qx-i27ZIYTNm_HPkdj77zKV2IjYA_iQ7ccdXNOaFlXSReAocFGwhNJVyQ',
-            featured: false
-        }
-    ]);
+    const [movie, setMovies] = useState([]);
 
     const [selectedMovie, setSelectedMovie] = useState(null);
 
+    useEffect(() => {
+        fetch("https://favorite-movies-cc1f1f0fe8fb.herokuapp.com/movies")
+        .then((response) => response.json())
+        .then((data) => {
+            const moviesFromApi = data.map((doc) => {
+                return {
+                    id: doc._id,
+                    title: doc.title,
+                    genre: doc.genre,
+                    director: doc.director,
+                    imageUrl: doc.imageUrl,
+                    description: doc.description
+                };
+            });
+
+            setMovies(moviesFromApi);
+        });
+    }, []);
+
     if (selectedMovie) {
+        const selectedGenre = selectedMovie.genre.name;
+
+        let similarMovies = movie.filter(movie => movie.genre.name === selectedGenre && movie.id !== selectedMovie.id);
+
         return (
-            <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
+        <div>
+            <MovieView movie={selectedMovie} onBackClick={() => { setSelectedMovie(null); }} />
+            <br />
+            <hr /> 
+            <h2>Similar Movies</h2>
+            <div>
+                {similarMovies.length > 0 ? (
+                    similarMovies.map(movie => (
+                        <MovieCard
+                        key={movie.id}
+                        movie={movie}
+                        onMovieClick={(newSelectedMovie) => {
+                            setSelectedMovie(newSelectedMovie);
+                        }}
+                        />
+                    ))
+                ) : (
+                    <div>No similar movies found.</div>
+                )}
+            </div>
+        </div>
         );
     }
 
