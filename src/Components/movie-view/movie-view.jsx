@@ -1,29 +1,34 @@
 import PropTypes from 'prop-types';
+import { Button, Card } from "react-bootstrap";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
+import "./movie-view.scss";
 
 export const MovieView = ({ movie, onBackClick }) => {
     return (
-        <div>
-            <div>
-                <img src={movie.imageUrl} />
-            </div>
-            <div>
-                <span>Title: </span>
-                <span>{movie.title}</span>
-            </div>
-            <div>
-                <span>Description: </span>
-                <span>{movie.description}</span>
-            </div>
-            <div>
-                <span>Genre: </span>
-                <span>{movie.genre.name}</span>
-            </div>
-            <div>
-                <span>Director: </span>
-                <span>{movie.director.name}</span>
-            </div>
-            <button onClick={onBackClick}>Back</button>
-        </div>
+        <Card className="border-0">
+            <Row className="g-0">
+                <Col md={8} className="d-flex flex-column justify-content-center">
+                    <Card.Body>
+                        <Card.Title className="fs-1" >{movie.title}</Card.Title>
+                        <Row className="d-flex align-items-center">
+                            <Col>
+                                <Card.Text className="fw-bold fs-4 opacity-50">{movie.director.name}</Card.Text>
+                            </Col>
+                            <Col>
+                                <Card.Text className="text-end">{movie.genre.name}</Card.Text>
+                            </Col>
+                        </Row>
+                    <Card.Text>{movie.description}</Card.Text>
+                    </Card.Body>
+                </Col>
+                <Col md={4}>
+                    <Card.Img variant="top" src={movie.imageUrl} />
+                </Col>
+                <Button variant="primary" onClick={onBackClick} className="back-button mt-4">Back</Button>
+            </Row>
+        </Card>
     );
 };
 
